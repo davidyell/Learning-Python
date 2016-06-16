@@ -1,4 +1,7 @@
-#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+from decimal import *
+
 
 class Gym:
 
@@ -11,19 +14,20 @@ class Gym:
     minutesPerVisit = 0
 
     def subscription_cost_per_visit(self):
-        print 'Subscription cost per visit: ', float(self.pricePerMonth) / float(self.visitsPerWeek * 4)
+        getcontext().prec = 3
+        return Decimal(self.pricePerMonth) / (Decimal(self.visitsPerWeek) * 4)
 
     def subscription_total_cost(self):
-        print 'Subscription monthly cost: ', self.pricePerMonth
+        return Decimal(self.pricePerMonth)
 
     def pay_per_use_cost_per_visit(self):
-        print 'Pay per use: ', self.payPerVisit
+        return Decimal(self.payPerVisit)
 
     def pay_per_use_total_cost(self):
-        print 'Pay per use monthly cost: ', float(self.payPerVisit) * float(self.visitsPerWeek * 4)
+        return Decimal(self.payPerVisit) * (Decimal(self.visitsPerWeek) * 4)
 
     def total_saved_per_month(self):
-        print 'Saving each month: ', (float(self.payPerVisit) * float(self.visitsPerWeek * 4)) - float(self.pricePerMonth)
+        return Decimal(self.payPerVisit) * (Decimal(self.visitsPerWeek) * 4) - Decimal(self.pricePerMonth)
 
 gym = Gym()
 gym.pricePerMonth = input("How much is the monthly subscription fee? ")
@@ -31,8 +35,8 @@ gym.visitsPerWeek = input("How many gym visits in a week? ")
 gym.payPerVisit = input("How much does it cost to use the gym on pay per use? ")
 gym.minutesPerVisit = input("How many minutes do you spend at the gym each session? ")
 
-gym.subscription_cost_per_visit()
-gym.subscription_total_cost()
-gym.pay_per_use_cost_per_visit()
-gym.pay_per_use_total_cost()
-gym.total_saved_per_month()
+print('Subscription cost per visit: £', gym.subscription_cost_per_visit())
+print('Subscription monthly cost: £', gym.subscription_total_cost())
+print('Pay per use: £', gym.pay_per_use_cost_per_visit())
+print('Pay per use monthly cost: £', gym.pay_per_use_total_cost())
+print('Saving each month: £', gym.total_saved_per_month())
